@@ -22,6 +22,11 @@ namespace MyStore.Controllers
             return View();
         }
 
+        public IActionResult Car()
+        {
+            return View();
+            //return Json("My method");
+        }
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
