@@ -15,16 +15,26 @@
         </ul>
     </div>
 }
-<form method="post">
-    <div class="form-group">
-        <label for="username">User Name</label>
-        <input name="username" class="form-control" type="text" placeholder="Enter your Username" />
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input name="username" class="form-control" type="text" placeholder="Enter your Password" />
-    </div>
-    <input type="submit" class="btn btn-primary" value="Sign Up"/>
+    <form method="post" asp-action="Register" asp-controller="Account">
+        <div class="form-group">
+            <label for="username">User Name</label>
+            <input name="username" class="@(ViewData.ModelState.ContainsKey("UserName") && ViewData.ModelState["UserName"].Errors.Any() ? "form-control is-invalid" : "form-control")" type="text" placeholder="Enter your Username" />
+            @if (ViewData.ModelState.ContainsKey("UserName"))
+        {
+            foreach (var error in ViewData.ModelState["UserName"].Errors)
+            {
+                <div class="invalid-feedback">
+                    @error.ErrorMessage
+                </div>
+        }
+    }
 
-</form>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input name="password" class="form-control" type="text" placeholder="Enter your Password" />
+        </div>
+        <input type="submit" class="btn btn-primary" value="Sign Up" />
+
+    </form>
 

@@ -8,17 +8,35 @@
 
 <div class="row">
     <div class="col-sm-12 col-md-4">   
-        <img class="img-fluid" src="@Model.Image" alt="@Model.Name"/>
+        <img class="img-fluid mt-4" src="@Model.Image" alt="@Model.Name"/>
     </div>
 
-    <div class="col-sm-12 col-md-8">     
+    <div class="col-sm-12 col-md-8">
         <h2>@Model.Name</h2>
-   
-    <p>@Model.Description</p>
+        <h5>@Model.Description</h5>
+        <br/>
+        
+        <h4>KEY FEATURES:</h4>
+        <p>@Model.Year</p>
+       
+        <p>@Model.Size feet</p>
+        <p>AC: @Model.AirCond</p>
+        <p>Number of Cabins: @Model.Cabins</p>
+        <br/>
+        
+        <h4>PRICES:</h4>
+        <h5>
+            High Season (Dec 16 - Jan 1
+            Feb 1 - Mar 31):
+        </h5> @(Model.PriceHighSeason.HasValue ? Model.PriceHighSeason.Value.ToString("C") : "No Price")
+        
+        <h5>
+            Off Season (Jul 10 - Nov 5):
+        </h5> @(Model.PriceOffSeason.HasValue ? Model.PriceOffSeason.Value.ToString("C") : "No Price")
+        
 
-    <h4>@(Model.Price.HasValue ? Model.Price.Value.ToString("C") : "No Price")</h4>
-    
-    
+
+
     </div>
 </div>
 

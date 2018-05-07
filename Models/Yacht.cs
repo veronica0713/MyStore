@@ -10,9 +10,14 @@ namespace MyStore.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public decimal? Price { get; set; }
+        public decimal? PriceHighSeason { get; set; }
+        public decimal? PriceOffSeason { get; set; }
         public string Image { get; set; }
         public int Size { get; set; }
+        public int Year { get; set; }
+        public int Cabins { get; set; }
+        public bool AirCond { get; set; }
+
 
     }
 }
