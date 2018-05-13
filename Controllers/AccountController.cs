@@ -70,7 +70,7 @@ namespace MyStore.Controllers
         //Beware of online examples!  Things might be renamed in code you read, or it might be DotNetFramework4.6
         //Update your Layout to display the correct links depending on whether the user is logged in / out
 
-        [HttpPost]
+        
         public IActionResult SignOut()
         {
             this._signInManager.SignOutAsync().Wait();
@@ -106,6 +106,10 @@ namespace MyStore.Controllers
             }
             return View();
         }
-      
+        public IActionResult LogIn()
+        {
+            return View();
+        }
+
     }
 }

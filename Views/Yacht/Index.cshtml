@@ -13,9 +13,11 @@
         <img class="img-fluid" src="@yacht.Image" alt="@yacht.Name" />
         <p>@yacht.Year</p>
         <p>@yacht.Description</p>
-        
+
         <p>@yacht.Size feet</p>
-        <h4>Weekly rates $13,000 - $16,000</h4>
+        <h4>Weekly rates</h4>  @(yacht.PriceHighSeason.HasValue ? yacht.PriceHighSeason.Value.ToString("C") : "No Price") <h4> - </h4> @(yacht.PriceOffSeason.HasValue ? yacht.PriceOffSeason.Value.ToString("C") : "No Price")
+
+        <br />
 
         @*Option 1: Use Razor in your HREF attribute*@
         @*<a class="btn btn-primary" href="/Yacht/Details/@yacht.ID">View this yacht!</a>*@

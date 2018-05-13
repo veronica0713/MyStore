@@ -25,6 +25,14 @@ namespace MyStore
         public void ConfigureServices(IServiceCollection services)
 
         {
+            //These are not part of .NET Core... they are seperate libraries that must be installed via a program called NuGet.
+            //Right click on your Project -> Manage NuGet Packages
+
+            Configuration.GetConnectionString("Boats");
+
+            //using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+            //using Microsoft.EntityFrameworkCore;
+            //using Microsoft.AspNetCore.Identity;
             services.AddDbContext<IdentityDbContext>(opt => opt.UseInMemoryDatabase("Identities"));
 
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
@@ -52,17 +60,17 @@ namespace MyStore
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            //I need this to instruct my app to use Cookies for tracking SignIn/SignOut status
+            app.UseAuthentication();
             app.UseStaticFiles();
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            //I need this to instruct my app to use Cookies for tracking SignIn/SignOut status
-            app.UseAuthentication();
+           
         }
     }
 }
