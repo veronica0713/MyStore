@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using MyStore.Models;
 
 namespace MyStore
 {
@@ -30,19 +31,23 @@ namespace MyStore
 
             Configuration.GetConnectionString("Boats");
 
+            string boatChartersConnectionString = Configuration.GetConnectionString("Boats");
+
             //using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
             //using Microsoft.EntityFrameworkCore;
             //using Microsoft.AspNetCore.Identity;
-            services.AddDbContext<IdentityDbContext>(opt => opt.UseInMemoryDatabase("Identities"));
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+
+            services.AddDbContext<BoatChartersDbContext>(opt => opt.UseSqlServer(boatChartersConnectionString));
+
+            services.AddIdentity<BoatChartesUser, IdentityRole>(options =>
                 {
                     options.Password.RequireDigit = false;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = false;
                 })
-                .AddEntityFrameworkStores<IdentityDbContext>()
+                .AddEntityFrameworkStores<BoatChartersDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();

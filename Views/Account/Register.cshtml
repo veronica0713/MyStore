@@ -1,4 +1,4 @@
-﻿
+﻿@model RegisterViewModel
 @{
     ViewData["Title"] = "Register";
 }
@@ -17,8 +17,8 @@
 }
     <form method="post" asp-action="Register" asp-controller="Account">
         <div class="form-group">
-            <label for="username">User Name</label>
-            <input name="username" class="@(ViewData.ModelState.ContainsKey("UserName") && ViewData.ModelState["UserName"].Errors.Any() ? "form-control is-invalid" : "form-control")" type="text" placeholder="Enter your Username" />
+            <label  asp-for="UserName"></label>
+            <input asp-for="UserName" class="@(ViewData.ModelState.ContainsKey("UserName") && ViewData.ModelState["UserName"].Errors.Any() ? "form-control is-invalid" : "form-control")" type="text" placeholder="Enter your Username" />
             @if (ViewData.ModelState.ContainsKey("UserName"))
         {
             foreach (var error in ViewData.ModelState["UserName"].Errors)
@@ -31,9 +31,26 @@
 
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
-            <input name="password" class="form-control" type="text" placeholder="Enter your Password" />
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control" type="password" placeholder="Enter your Password" required  />
         </div>
+        <div class="form-group">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control" type="text" placeholder="Enter your First Name" required />
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control" type="text" placeholder="Enter your Last Name" required />
+        </div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" type="email" placeholder="Enter your Email"required  />
+        </div>
+        <div class="form-group">
+            <label asp-for="PhoneNumber"></label>
+            <input asp-for="PhoneNumber" class="form-control" type="tel" placeholder="Enter your Phone Number" required />
+        </div>
+
         <input type="submit" class="btn btn-primary" value="Sign Up" />
 
     </form>

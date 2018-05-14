@@ -11,10 +11,10 @@ namespace MyStore.Controllers
 {
     public class AccountController : Controller
     {
-        SignInManager<IdentityUser> _signInManager;
+        SignInManager<BoatChartesUser> _signInManager;
 
         //using Microsoft.AspNetCore.Identity
-        public AccountController(SignInManager<IdentityUser> signInManager)
+        public AccountController(SignInManager<BoatChartesUser> signInManager)
         {
             this._signInManager = signInManager;
         }
@@ -36,7 +36,14 @@ namespace MyStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityUser newUser = new IdentityUser(model.UserName);
+                BoatChartesUser newUser = new BoatChartesUser
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName =  model.LastName,
+                    PhoneNumber = model.PhoneNumber
+                };
                 IdentityResult creationResult = this._signInManager.UserManager.CreateAsync(newUser).Result;
                 if (creationResult.Succeeded)
                 {
@@ -83,7 +90,7 @@ namespace MyStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityUser existingUser = this._signInManager.UserManager.FindByNameAsync(model.UserName).Result;
+                BoatChartesUser existingUser = this._signInManager.UserManager.FindByNameAsync(model.UserName).Result;
 
                 if (existingUser != null)
                 {

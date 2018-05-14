@@ -1,4 +1,5 @@
-﻿@model Yacht
+﻿@using Microsoft.CodeAnalysis.CSharp.Syntax
+@model Yacht
 @{
     ViewData["Title"] = "Details";
 }
@@ -14,15 +15,27 @@
     <div class="col-sm-12 col-md-8">
         <h2>@Model.Name</h2>
         <h5> @Model.Description</h5>
-        <br/>
-        
-        <h4>KEY FEATURES:</h4>
-        <p>@Model.Year</p>
        
-        <p>@Model.Size feet</p>
-        <p>AC: @Model.AirCond</p>
-        <p>Number of Cabins: @Model.Cabins</p>
-        <br/>
+        <div>
+            <h4>KEY FEATURES:</h4>
+            <p>Year: @Model.Year</p>
+
+            <p>Size: @Model.Size feet</p>
+            <p>
+                Air Condition: @if (Model.AirCond == true)
+             {
+            @:Yes
+             }
+            else
+            {
+            @:no
+            }
+            </p>
+
+
+
+            <p>Number of Cabins: @Model.Cabins</p>
+        </div>
         
         <h4>PRICES:</h4>
         <h5>
@@ -34,7 +47,7 @@
             Off Season (Jul 10 - Nov 5):
         </h5> @(Model.PriceOffSeason.HasValue ? Model.PriceOffSeason.Value.ToString("C") : "No Price")
         
-
+        </div>
 
 
     </div>
