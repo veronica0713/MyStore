@@ -63,5 +63,9 @@ namespace MyStore.Controllers
             return RedirectToAction("Index");
 
         }
+        public IActionResult CheckOut()
+        {
+            return RedirectToAction("Index", "CheckOut"); 
+        }
     }
 }

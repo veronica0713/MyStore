@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
 namespace MyStore.Models
 {
@@ -22,6 +23,8 @@ namespace MyStore.Models
         public DbSet<Yacht> Products { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 
     public class BoatChartesUser : IdentityUser
@@ -50,5 +53,40 @@ namespace MyStore.Models
         public Cart Cart { get; set; }
         public Yacht Yacht { get; set; }
         public DateTime Dates { get; set; }
+    }
+    public class Order
+    {
+        public Order()
+        {
+            this.OrderItems = new HashSet<OrderItem>();
+        }
+
+        public int ID { get; set; }
+       
+        public DateTime LastModified { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
+
+        public string Country { get; set; }
+        public string PhoneNumber { get; set; }
+
+        public string State { get; set; }
+        public int Zip { get; set; }
+        public string NameOnCard { get; set; }
+        public int CCnumber { get; set; }
+        public string Expiration { get; set; }
+        public int CVV { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; }
+
+    }
+    public class OrderItem
+    {
+        public int ID { get; set; }
+        public Order Order { get; set; }
+        public Yacht Yacht { get; set; }
+        public DateTime Dates { get; set; }
+
     }
 }

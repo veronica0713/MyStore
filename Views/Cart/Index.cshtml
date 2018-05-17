@@ -13,8 +13,8 @@
 else
 {
     <table class="table table-striped">
-        @foreach(var item in Model.CartItems)
-        {
+        @foreach (var item in Model.CartItems)
+    {
         <tr>
             <td>@item.Yacht.Name</td>
             <td>@item.Yacht.Description</td>
@@ -29,8 +29,13 @@ else
                 </form>
             </td>
         </tr>
-
-        }
+        <div>
+        <form method="post" asp-action="CheckOut">
+            <input type="hidden" name="id" value="@item.ID" />
+            <input type="submit" value="CheckOut" class="btn btn-primary" />
+        </form>
+        </div>
+}
     </table>
 
 }
