@@ -11,9 +11,10 @@ using System;
 namespace MyStore.Migrations
 {
     [DbContext(typeof(BoatChartersDbContext))]
-    partial class BoatChartersDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180514182631_Yachts")]
+    partial class Yachts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,40 +184,6 @@ namespace MyStore.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("MyStore.Models.Cart", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("CookieIdentifier");
-
-                    b.Property<DateTime>("LastModified");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Carts");
-                });
-
-            modelBuilder.Entity("MyStore.Models.CartItem", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("CartID");
-
-                    b.Property<DateTime>("Dates");
-
-                    b.Property<int?>("YachtID");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("CartID");
-
-                    b.HasIndex("YachtID");
-
-                    b.ToTable("CartItems");
-                });
-
             modelBuilder.Entity("MyStore.Models.Yacht", b =>
                 {
                     b.Property<int>("ID")
@@ -288,17 +255,6 @@ namespace MyStore.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("MyStore.Models.CartItem", b =>
-                {
-                    b.HasOne("MyStore.Models.Cart", "Cart")
-                        .WithMany("CartItems")
-                        .HasForeignKey("CartID");
-
-                    b.HasOne("MyStore.Models.Yacht", "Yacht")
-                        .WithMany()
-                        .HasForeignKey("YachtID");
                 });
 #pragma warning restore 612, 618
         }

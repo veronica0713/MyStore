@@ -23,7 +23,10 @@
         @*<a class="btn btn-primary" href="/Yacht/Details/@yacht.ID">View this yacht!</a>*@
         @*Option 2: Use Razor Tag Helpers to GENERATE the href *@
         <a class="btn btn-primary" asp-controller="Yacht" asp-action="Details" asp-route-id="@yacht.ID">View This Yacht!</a>
-
+        <form method="post" asp-action="Book">
+            <input name="ID" value="@yacht.ID" type="hidden" />
+            <input type="submit" class="btn btn-primary" value="Book" />
+        </form>
     </div>
     }
 

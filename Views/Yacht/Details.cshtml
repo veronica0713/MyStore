@@ -48,10 +48,14 @@
         </h5> @(Model.PriceOffSeason.HasValue ? Model.PriceOffSeason.Value.ToString("C") : "No Price")
         
         </div>
-
+    <form method="post" asp-action="Book">
+        <input asp-for="ID" type="hidden"/>
+        <input type="submit" class="btn btn-primary" value="Book"/>
+    </form>
 
     </div>
-</div>
+
+
 
 
 

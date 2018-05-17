@@ -10,6 +10,13 @@ namespace MyStore.Controllers
 {
     public class HomeController : Controller
     {
+         BoatChartersDbContext _db;
+
+        public HomeController(BoatChartersDbContext boatChartersDbContext)
+        {
+            _db = boatChartersDbContext;
+        }
+             
         public IActionResult Index()
         {
             return View();
