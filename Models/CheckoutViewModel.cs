@@ -12,26 +12,29 @@ namespace MyStore.Models
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+        [Required]
         [EmailAddress]
         public string Email { get; set; }
         [Required]
         public string Address { get; set; }
-
+        [Required]
         public string Country { get; set; }
+        [Required]
         [Phone]
         public string PhoneNumber { get; set; }
-
+        [Required]
         public string State { get; set; }
-        public int Zip { get; set; }
+        [Required]
+        public string Zip { get; set; }
         [Required]
         public string NameOnCard { get; set; }
         [Required]
-        public int CCnumber { get; set; }
+        [MaxLength(16)]
+        public string CCnumber { get; set; }
         [Required]
         public string Expiration { get; set; }
         [Required]
-        public int CVV { get; set; }
-
-
+        public string CVV { get; set; }
+        public Cart Cart { get; set; }
     }
 }

@@ -11,13 +11,13 @@ namespace MyStore.Models
     {
         [Required]
         [MinLength(5)]
-        [MaxLength(10)]
+        [MaxLength(20)]
         public string UserName { get; set; }
 
         [Required]
         public string Password { get; set; }
-
-        [EmailAddress]
+        [Required]
+       [EmailAddress]
         public string Email { get; set; }
         [Phone]
         public string PhoneNumber { get; set; }
@@ -26,4 +26,5 @@ namespace MyStore.Models
         [Required]
         public string LastName { get; set; }
     }
+       
 }

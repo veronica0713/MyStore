@@ -62,7 +62,7 @@ namespace MyStore.Models
         }
 
         public int ID { get; set; }
-       
+
         public DateTime LastModified { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -73,11 +73,11 @@ namespace MyStore.Models
         public string PhoneNumber { get; set; }
 
         public string State { get; set; }
-        public int Zip { get; set; }
+        public string Zip { get; set; }
         public string NameOnCard { get; set; }
-        public int CCnumber { get; set; }
+        public string CCnumber { get; set; }
         public string Expiration { get; set; }
-        public int CVV { get; set; }
+        public string CVV { get; set; }
         public ICollection<OrderItem> OrderItems { get; set; }
 
     }

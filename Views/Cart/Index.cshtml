@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Cart</h2>
 @if(Model.CartItems.Count == 0)
 {
     <p>You have no items in your cart!</p>
@@ -29,12 +29,12 @@ else
                 </form>
             </td>
         </tr>
-        <div>
+
         <form method="post" asp-action="CheckOut">
             <input type="hidden" name="id" value="@item.ID" />
             <input type="submit" value="CheckOut" class="btn btn-primary" />
         </form>
-        </div>
+
 }
     </table>
 

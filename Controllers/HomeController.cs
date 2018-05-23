@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyStore.Models;
 
 namespace MyStore.Controllers
@@ -44,6 +45,26 @@ namespace MyStore.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public async Task<IActionResult> CartSummary()
+        {
+            Guid cartId;
+            Cart cart = null;
+            if (Request.Cookies.ContainsKey("cartId"))
+            {
+                if (Guid.TryParse(Request.Cookies["cartId"], out cartId))
+                {
+                    cart = await _db.Carts
+                        .Include(carts => carts.CartItems)
+                        .ThenInclude(cartitems => cartitems.Yacht)
+                        .FirstOrDefaultAsync(x => x.CookieIdentifier == cartId);
+                }
+            }
+            if (cart == null)
+            {
+                cart = new Cart();
+            }
+            return Json(cart);
         }
     }
 }

@@ -224,9 +224,9 @@ namespace MyStore.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<int>("CCnumber");
+                    b.Property<string>("CCnumber");
 
-                    b.Property<int>("CVV");
+                    b.Property<string>("CVV");
 
                     b.Property<string>("Country");
 
@@ -246,7 +246,7 @@ namespace MyStore.Migrations
 
                     b.Property<string>("State");
 
-                    b.Property<int>("Zip");
+                    b.Property<string>("Zip");
 
                     b.HasKey("ID");
 

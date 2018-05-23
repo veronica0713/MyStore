@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Internal;
 using MyStore.Models;
+using Newtonsoft.Json.Serialization;
+
 
 namespace MyStore
 {
@@ -51,8 +53,25 @@ namespace MyStore
                 .AddEntityFrameworkStores<BoatChartersDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services
+                .AddMvc()
+                .AddJsonOptions(
+                    o =>
+                    {
+                        o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                        o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    });
+
+            services.AddTransient((x) => { return new EmailService(Configuration["SendGridKey"]); });
+            services.AddTransient((x) => {
+                return new Braintree.BraintreeGateway(
+                    Configuration["BraintreeEnvironment"],
+                    Configuration["BraintreeMerchantId"],
+                    Configuration["BraintreePublicKey"],
+                    Configuration["BraintreePrivateKey"]);
+            });
         }
+    
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, BoatChartersDbContext db)
@@ -78,7 +97,8 @@ namespace MyStore
 
                 DbInitializer.Initialize(db);
             });
-           
+            
+
         }
     }
 }

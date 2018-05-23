@@ -29,7 +29,7 @@
                     <a class="nav-link" asp-area="" asp-controller="Yacht" asp-action="Index">Our fleet</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
+                    <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index"><span id="cartBadge" class="badge badge-primary">0</span>Cart</a>
                 </li>
               
                 @if (!User.Identity.IsAuthenticated)
