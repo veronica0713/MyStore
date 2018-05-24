@@ -26,12 +26,19 @@
         
 
         <div class="mb-3">
-            <label for="email">Email <span class="text-muted">(Optional)</span></label>
+            <label for="email">Email <span class="text-muted"></span></label>
             <input type="email" class="form-control" id="email" placeholder="you@example.com" name="Email">
             <div class="invalid-feedback">
                 Please enter a valid email address for shipping updates.
             </div>
         </div>
+    <div class="mb-3">
+    <label for="phone">Phone <span class="text-muted"></span></label>
+    <input type="phone" class="form-control" id="phone" placeholder="" name="PhoneNumber">
+    <div class="invalid-feedback">
+        Please enter a valid phone number.
+    </div>
+</div>
 
         <div class="mb-3">
             <label for="address">Address</label>
@@ -103,7 +110,7 @@
             <div class="col-md-6 mb-3">
                 <label for="cc-number">Credit card number</label>
                 
-               <input type="text" class="form-control" id="cc-number" placeholder="" required name="CCnumber">
+               <input type="text" class="form-control" id="cc-number" placeholder="" maxlength="16" required name="CCnumber">
                 <div class="invalid-feedback">
                     Credit card number is required
                 </div>
@@ -111,15 +118,24 @@
         </div>
         <div class="row">
             <div class="col-md-3 mb-3">
-                <label for="cc-expiration">Expiration</label>
-                <input type="text" class="form-control" id="cc-expiration" placeholder="" required name="Expiration">
+                <label for="cc-expiration">Expiration Month</label>
+                <input type="text" class="form-control" id="cc-expiration" placeholder="" required name="ExpirationMonth">
                 <div class="invalid-feedback">
                     Expiration date required
                 </div>
+
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="cc-expiration">Expiration Year</label>
+                <input type="text" class="form-control" id="cc-expiration" placeholder="" required name="ExpirationYear">
+                <div class="invalid-feedback">
+                    Expiration date required
+                </div>
+
             </div>
             <div class="col-md-3 mb-3">
                 <label for="cc-expiration">CVV</label>
-                <input type="text" class="form-control" id="cc-cvv" placeholder="" required name="CVV">
+                <input type="text" class="form-control" id="cc-cvv" placeholder=""maxlength="3" required name="CVV">
                 <div class="invalid-feedback">
                     Security code required
                 </div>

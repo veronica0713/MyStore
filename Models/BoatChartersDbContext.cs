@@ -62,7 +62,8 @@ namespace MyStore.Models
         }
 
         public int ID { get; set; }
-
+        public string TrackingNumber { get; set; }
+        public DateTime OrderDate { get; set; }
         public DateTime LastModified { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -76,7 +77,8 @@ namespace MyStore.Models
         public string Zip { get; set; }
         public string NameOnCard { get; set; }
         public string CCnumber { get; set; }
-        public string Expiration { get; set; }
+        public string ExpirationMonth { get; set; }
+        public string ExpirationYear { get; set; }
         public string CVV { get; set; }
         public ICollection<OrderItem> OrderItems { get; set; }
 

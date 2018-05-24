@@ -15,12 +15,14 @@ namespace MyStore.Controllers
     {
         SignInManager<BoatChartesUser> _signInManager;
         EmailService _emailService;
+        Braintree.BraintreeGateway _braintreeGateway;
 
         //using Microsoft.AspNetCore.Identity
-        public AccountController(SignInManager<BoatChartesUser> signInManager, EmailService emailService)
+        public AccountController(SignInManager<BoatChartesUser> signInManager, EmailService emailService, Braintree.BraintreeGateway braintreeGateway)
         {
             this._signInManager = signInManager;
             this._emailService = emailService;
+            this._braintreeGateway = braintreeGateway;
         }
         public IActionResult Index()
         {
@@ -54,6 +56,34 @@ namespace MyStore.Controllers
                     IdentityResult passwordResult = await this._signInManager.UserManager.AddPasswordAsync(newUser, model.Password);
                     if (passwordResult.Succeeded)
                     {
+
+                        Braintree.CustomerSearchRequest search = new Braintree.CustomerSearchRequest();
+                        search.Email.Is(model.Email);
+                       var searchResult = await _braintreeGateway.Customer.SearchAsync(search);
+                        if (searchResult.Ids.Count == 0)
+                        {
+                            //create a new Braintree customer
+                            await _braintreeGateway.Customer.CreateAsync(new Braintree.CustomerRequest
+                            {
+                                Email = model.Email,
+                                FirstName = model.FirstName,
+                                LastName = model.LastName,
+                                Phone = model.PhoneNumber
+                            });
+                        }
+                        else
+                        {
+                            //update the existing Braintree customer
+                            Braintree.Customer existingCustomer = searchResult.FirstItem;
+                            await _braintreeGateway.Customer.UpdateAsync(existingCustomer.Id, new Braintree.CustomerRequest
+                            {
+                                FirstName = model.FirstName,
+                                LastName = model.LastName,
+                                Phone = model.PhoneNumber
+                            });
+                        }
+
+
                         var confirmationToken = await _signInManager.UserManager.GenerateEmailConfirmationTokenAsync(newUser);
                         
                             confirmationToken = System.Net.WebUtility.UrlEncode(confirmationToken);

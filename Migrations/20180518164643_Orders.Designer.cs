@@ -11,9 +11,10 @@ using System;
 namespace MyStore.Migrations
 {
     [DbContext(typeof(BoatChartersDbContext))]
-    partial class BoatChartersDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180518164643_Orders")]
+    partial class Orders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,9 +233,7 @@ namespace MyStore.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("ExpirationMonth");
-
-                    b.Property<string>("ExpirationYear");
+                    b.Property<string>("Expiration");
 
                     b.Property<string>("FirstName");
 

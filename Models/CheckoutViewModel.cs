@@ -32,7 +32,9 @@ namespace MyStore.Models
         [MaxLength(16)]
         public string CCnumber { get; set; }
         [Required]
-        public string Expiration { get; set; }
+        public string ExpirationMonth { get; set; }
+        [Required]
+        public string ExpirationYear { get; set; }
         [Required]
         public string CVV { get; set; }
         public Cart Cart { get; set; }
