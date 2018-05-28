@@ -33,15 +33,16 @@ else
                     
                 </tr>
 
-                <form method="post" asp-action="CheckOut">
-                    <input type="hidden" name="id" value="@item.ID" />
-                    <input type="submit" value="CheckOut" class="btn btn-primary" />
-                </form>
+               
 
             }
            
     
         </table>
+        <form method="post" asp-action="CheckOut">
+           
+            <input type="submit" value="CheckOut" class="btn btn-primary" />
+        </form>
        
     </div>
 }
