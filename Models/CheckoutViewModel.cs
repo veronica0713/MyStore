@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Braintree;
+using SmartyStreets.USExtractApi;
 
 namespace MyStore.Models
 {
@@ -38,5 +40,6 @@ namespace MyStore.Models
         [Required]
         public string CVV { get; set; }
         public Cart Cart { get; set; }
+        
     }
 }

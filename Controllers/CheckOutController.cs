@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using Braintree;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using MyStore.Migrations;
 using MyStore.Models;
+using SmartyStreets.USAutocompleteApi;
 
 namespace MyStore.Controllers
 {
@@ -19,16 +21,18 @@ namespace MyStore.Controllers
         private EmailService _emailService;
         private SignInManager<BoatChartesUser> _signInManager;
         private BraintreeGateway _braintreeGateway;
+        private SmartyStreets.USStreetApi.Client _usStreetApiClient;
 
         public CheckOutController(BoatChartersDbContext oContext,
             EmailService emailService,
             SignInManager<BoatChartesUser> signInManager,
-            Braintree.BraintreeGateway braintreeGateway)
+            Braintree.BraintreeGateway braintreeGateway, SmartyStreets.USStreetApi.Client usStreetApiClient)
         {
             _oContext = oContext;
             _emailService = emailService;
             _signInManager = signInManager;
             _braintreeGateway = braintreeGateway;
+            _usStreetApiClient = usStreetApiClient;
         }
 
 
@@ -58,17 +62,23 @@ namespace MyStore.Controllers
                             .ThenInclude(cartitems => cartitems.Yacht)
                             .FirstOrDefaultAsync(x => x.CookieIdentifier == cartId);
                     }
-                }
 
+
+                   
+
+                    
+
+                }
+                
                 Order order = new Order
                 {
                     TrackingNumber = Guid.NewGuid().ToString(),
                     OrderDate = DateTime.Now,
                     OrderItems = model.Cart.CartItems.Select(x => new OrderItem
                     {
-                        ID = x.Yacht.ID,
+                        
                         Yacht = x.Yacht,
-                       
+
                         Dates = x.Dates
                     }).ToArray(),
                     FirstName = model.FirstName,
@@ -80,26 +90,27 @@ namespace MyStore.Controllers
                     PhoneNumber = model.PhoneNumber
 
                 };
+              
 
                 Braintree.Customer customer = null;
                 Braintree.CustomerSearchRequest search = new Braintree.CustomerSearchRequest();
                 search.Email.Is(model.Email);
                 var searchResult = await _braintreeGateway.Customer.SearchAsync(search);
-                                if (searchResult.Ids.Count == 0)
-                                {
-                                        //Create  a new Braintree Customer
-                                       Braintree.Result < Customer > creationResult = 
-                                           await _braintreeGateway.Customer.CreateAsync(new Braintree.CustomerRequest
-                                {
-                                       Email = model.Email,
-                                       Phone = model.PhoneNumber
-                                });
-                                   customer = creationResult.Target;
-                                }
-                                else
-                                {
-                                   customer = searchResult.FirstItem;
-                                }
+                if (searchResult.Ids.Count == 0)
+                {
+                    //Create  a new Braintree Customer
+                    Braintree.Result<Customer> creationResult =
+                        await _braintreeGateway.Customer.CreateAsync(new Braintree.CustomerRequest
+                        {
+                            Email = model.Email,
+                            Phone = model.PhoneNumber
+                        });
+                    customer = creationResult.Target;
+                }
+                else
+                {
+                    customer = searchResult.FirstItem;
+                }
 
 
                 //More on card testing: https://developers.braintreepayments.com/reference/general/testing/dotnet
@@ -118,14 +129,14 @@ namespace MyStore.Controllers
                     },
                     CustomerId = customer.Id,
                     LineItems = model.Cart.CartItems.Select(x => new TransactionLineItemRequest
-                                                                                       {
-                    Name = x.Yacht.Name,
-                    Description = x.Yacht.Description,
-                    ProductCode = x.Yacht.ID.ToString(),
-                    Quantity = '1',
-                    LineItemKind = TransactionLineItemKind.DEBIT,
-                    UnitAmount = x.Yacht.PriceHighSeason, //* x.Quantity,
-                    TotalAmount = x.Yacht.PriceHighSeason// * x.Quantity
+                    {
+                        Name = x.Yacht.Name,
+                       // Description = x.Yacht.Description,
+                        ProductCode = x.Yacht.ID.ToString(),
+                        Quantity = '1',
+                        LineItemKind = TransactionLineItemKind.DEBIT,
+                        UnitAmount = x.Yacht.PriceHighSeason, //* x.Quantity,
+                        TotalAmount = x.Yacht.PriceHighSeason// * x.Quantity
                     }).ToArray()
 
                 };
@@ -138,7 +149,7 @@ namespace MyStore.Controllers
                     _oContext.Carts.Remove(model.Cart);
                     await _oContext.SaveChangesAsync();
                     Response.Cookies.Delete("cartId");
-                    return RedirectToAction("Index","Home" , new { id = order.TrackingNumber });
+                    return RedirectToAction("Index", "Home", new { id = order.TrackingNumber });
                 }
 
             }
@@ -146,6 +157,6 @@ namespace MyStore.Controllers
             return View(model);
         }
 
-            
-        }
+
     }
+}

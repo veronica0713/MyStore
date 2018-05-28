@@ -6,12 +6,15 @@
   "flags": [],
   "linkedModules": [],
   "topLevelPatterns": [
+    "bootstrap-datepicker@^1.8.0",
     "bootstrap@^4.1.1",
     "jquery@^3.3.1",
     "popper.js@^1.14.3"
   ],
   "lockfileEntries": {
+    "bootstrap-datepicker@^1.8.0": "https://registry.yarnpkg.com/bootstrap-datepicker/-/bootstrap-datepicker-1.8.0.tgz#c63513931e6f09f16ae9f11b62f32d950df3958e",
     "bootstrap@^4.1.1": "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.1.1.tgz#3aec85000fa619085da8d2e4983dfd67cf2114cb",
+    "jquery@>=1.7.1 <4.0.0": "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca",
     "jquery@^3.3.1": "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca",
     "popper.js@^1.14.3": "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.3.tgz#1438f98d046acf7b4d78cd502bf418ac64d4f095"
   },

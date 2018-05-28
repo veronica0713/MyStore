@@ -14,48 +14,88 @@
 
     <div class="col-sm-12 col-md-8">
         <h2>@Model.Name</h2>
-        <h5> @Model.Description</h5>
-       
+        <p> @Model.Description</p>
+
         <div>
             <h4>KEY FEATURES:</h4>
-            <p>Year: @Model.Year</p>
+            <ul>
 
-            <p>Size: @Model.Size feet</p>
-            <p>
-                Air Condition: @if (Model.AirCond == true)
-             {
-            @:Yes
-             }
+                <li>Year: @Model.Year</li>
+
+                <li>Size: @Model.Size feet</li>
+                <li>
+                    Air Condition:
+                    @if (Model.AirCond == true)
+                {
+                    @:Yes
+            }
             else
             {
-            @:no
-            }
-            </p>
+                @:no
+}
+                </li>
 
 
 
-            <p>Number of Cabins: @Model.Cabins</p>
+                <li>Number of Cabins: @Model.Cabins</li>
+            </ul>
+        </div>
+        <div class="yacht-pricing ">
+
+            <div class="first inline ">
+                <h5>
+                    High Season
+                </h5>
+                <p>
+                    Dec 16 - Jan 1
+                    <br />
+                    Feb 1 - Mar 31
+                </p>
+                <p class="price">
+                    @(Model.PriceHighSeason.HasValue ? Model.PriceHighSeason.Value.ToString("C") : "No Price")
+                </p>
+            </div>
+            <div class="one-fourth inline">
+                <h5>
+                    Off Season
+                </h5>
+                <p>
+                    Jul 10 - Nov 5
+                    <br />
+                    May 1 - Jul 9
+                </p>
+                <p class="price">
+                    @(Model.PriceOffSeason.HasValue ? Model.PriceOffSeason.Value.ToString("C") : "No Price")
+                </p>
+            </div>
         </div>
         
-        <h4>PRICES:</h4>
-        <h5>
-            High Season (Dec 16 - Jan 1
-            Feb 1 - Mar 31):
-        </h5> @(Model.PriceHighSeason.HasValue ? Model.PriceHighSeason.Value.ToString("C") : "No Price")
         
-        <h5>
-            Off Season (Jul 10 - Nov 5):
-        </h5> @(Model.PriceOffSeason.HasValue ? Model.PriceOffSeason.Value.ToString("C") : "No Price")
-        
+        <div class="input-group date" data-provide="datepicker">
+            <input type="text" class="form-control">
+            <div class="input-group-addon">
+                <span class="octicon calendar"></span>
+            </div>
         </div>
-    <form method="post" asp-action="Book">
-        <input asp-for="ID" type="hidden"/>
-        <input type="submit" class="btn btn-primary" value="Book"/>
-    </form>
+        
 
+        <div class="mt-2">
+            <form method="post" asp-action="Book">
+                <input asp-for="ID" type="hidden" />
+                <input type="submit" class="btn btn-primary" value="Book" />
+            </form>
+        </div>
+    </div>
+    
+   
+    
     </div>
 
 
 
 
 
+@section Scripts
+{
+
+}

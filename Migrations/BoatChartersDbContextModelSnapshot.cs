@@ -244,9 +244,13 @@ namespace MyStore.Migrations
 
                     b.Property<string>("NameOnCard");
 
+                    b.Property<DateTime>("OrderDate");
+
                     b.Property<string>("PhoneNumber");
 
                     b.Property<string>("State");
+
+                    b.Property<string>("TrackingNumber");
 
                     b.Property<string>("Zip");
 

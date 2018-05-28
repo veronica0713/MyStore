@@ -66,5 +66,9 @@ namespace MyStore.Controllers
             }
             return Json(cart);
         }
+        public IActionResult Search(string id)
+        {
+            return Json(_db.Products.Where(x => x.Description.Contains(id) || x.Name.Contains(id)).ToList());
+        }
     }
 }
