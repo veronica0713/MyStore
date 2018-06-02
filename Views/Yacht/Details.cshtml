@@ -1,4 +1,5 @@
-﻿@using Microsoft.CodeAnalysis.CSharp.Syntax
+﻿@using System.Data
+@using Microsoft.CodeAnalysis.CSharp.Syntax
 @model Yacht
 @{
     ViewData["Title"] = "Details";
@@ -42,50 +43,56 @@
         </div>
         <div class="yacht-pricing ">
 
-            <div class="first inline ">
+            <div class="first d-inline-block ">
                 <h5>
                     High Season
                 </h5>
                 <p>
-                    Dec 16 - Jan 1
-                    <br />
-                    Feb 1 - Mar 31
+                    Nov 16 - Mar 31
                 </p>
                 <p class="price">
                     @(Model.PriceHighSeason.HasValue ? Model.PriceHighSeason.Value.ToString("C") : "No Price")
                 </p>
             </div>
-            <div class="one-fourth inline">
+            <div class="one-fourth d-inline-block">
                 <h5>
                     Off Season
                 </h5>
                 <p>
-                    Jul 10 - Nov 5
-                    <br />
-                    May 1 - Jul 9
+                  Apr 1 - Nov 15
                 </p>
                 <p class="price">
                     @(Model.PriceOffSeason.HasValue ? Model.PriceOffSeason.Value.ToString("C") : "No Price")
                 </p>
             </div>
         </div>
-        
-        
 
-        <div class="input-group mb-3 w-25">
-            <div class="input-group-prepend">
-                <i class="input-group-text far fa-calendar-alt"></i>
-            </div>
-            <input type="text" class="form-control"  data-provide="datepicker">
-        </div>
-        
 
+        <h4>Choose your dates:</h4>
         <div class="mt-2">
             <form method="post" asp-action="Book">
                 <input asp-for="ID" type="hidden" />
+                <div class="input-group mb-3 w-25 ">
+                    <div class="input-group-prepend">
+                        <i class="input-group-text far fa-calendar-alt"></i>
+                    </div>
+                    <input type="text" id="dateFrom" class="form-control" data-provide="datepicker" name="dateFrom" placeholder="from">
+                </div>
+
+                <div class="input-group mb-3 w-25">
+                    <div class="input-group-prepend">
+                        <i class="input-group-text far fa-calendar-alt"></i>
+                    </div>
+                    <input type="text" id="dateTo" class="form-control" data-provide="datepicker" name="dateTo" placeholder="to">
+                </div>
+               
                 <input type="submit" class="btn btn-primary" value="Book" />
+                
+               
             </form>
         </div>
+       
+
     </div>
     
    

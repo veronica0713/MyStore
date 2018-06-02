@@ -79,7 +79,8 @@ namespace MyStore.Controllers
                         
                         Yacht = x.Yacht,
 
-                        Dates = x.Dates
+                        DatesFrom = x.DatesFrom,
+                        DatesTo = x.DatesTo
                     }).ToArray(),
                     FirstName = model.FirstName,
                     LastName = model.LastName,
@@ -149,7 +150,7 @@ namespace MyStore.Controllers
                     _oContext.Carts.Remove(model.Cart);
                     await _oContext.SaveChangesAsync();
                     Response.Cookies.Delete("cartId");
-                    return RedirectToAction("Index", "Home", new { id = order.TrackingNumber });
+                    return RedirectToAction("Receipt", new { id = order.ID });
                 }
 
             }
@@ -157,6 +158,12 @@ namespace MyStore.Controllers
             return View(model);
         }
 
+        public IActionResult Receipt(int id)
+        {
+            var order = _oContext.Orders.FirstOrDefault(x => x.ID == id);
 
+
+            return View(order);
+        }
     }
 }

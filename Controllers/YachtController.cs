@@ -39,7 +39,7 @@ namespace MyStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult Book(int id, DateTime dates)
+        public IActionResult Book(int id, [FromForm] DateTime dateFrom, [FromForm] DateTime dateTo)
         {
             Guid cartId;
             Cart cart = null;
@@ -53,6 +53,7 @@ namespace MyStore.Controllers
                         .ThenInclude(cartitems => cartitems.Yacht)
                         .FirstOrDefault(x => x.CookieIdentifier == cartId);
                 }
+                
             }
 
             if (cart == null)
@@ -73,7 +74,8 @@ namespace MyStore.Controllers
                 cart.CartItems.Add(item);
             }
 
-            //item.Dates += dates;
+            item.DatesFrom = dateFrom;
+            item.DatesTo = dateTo;
             cart.LastModified = DateTime.Now;
 
             _context.SaveChanges();

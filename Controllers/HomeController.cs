@@ -68,7 +68,8 @@ namespace MyStore.Controllers
         }
         public IActionResult Search(string search)
         {
-            return Json(_db.Products.Where(x => x.Description.Contains(search) || x.Name.Contains(search)).ToList());
+            var mo =_db.Products.Where(x => x.Description.Contains(search) || x.Name.Contains(search)).ToList();
+            return View("Search", mo);
         }
     }
 }

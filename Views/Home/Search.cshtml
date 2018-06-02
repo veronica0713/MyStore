@@ -1,0 +1,39 @@
+﻿@using Microsoft.CodeAnalysis.CSharp.Syntax
+@model IEnumerable<Yacht>
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h2>Search</h2>
+
+<div class="row">
+    @foreach (var yacht in Model)
+    {
+        <div class="col-sm-12 col-md-6">
+            <h3>@yacht.Name</h3>
+            <img class="img-fluid" src="@yacht.Image" alt="@yacht.Name" />
+            <p>@yacht.Year</p>
+            <p>@yacht.Description</p>
+
+            <div>
+                <h4>Weekly rates:</h4>  @(yacht.PriceHighSeason.HasValue ? yacht.PriceHighSeason.Value.ToString("C") : "No Price")  -  @(yacht.PriceOffSeason.HasValue ? yacht.PriceOffSeason.Value.ToString("C") : "No Price")
+            </div>
+
+
+            @*Option 1: Use Razor in your HREF attribute*@
+            @*<a class="btn btn-primary" href="/Yacht/Details/@yacht.ID">View this yacht!</a>*@
+            @*Option 2: Use Razor Tag Helpers to GENERATE the href *@
+
+            <a class="btn btn-primary mt-2" asp-controller="Yacht" asp-action="Details" asp-route-id="@yacht.ID">View This Yacht!</a>
+            @*<div class="mt-2">
+                <form method="post" asp-controller="Yacht" asp-action="Book">
+                    <input name="ID" value="@yacht.ID" type="hidden" />
+                    <input type="submit" class="btn btn-primary" value="Book" />
+                </form>
+            </div>*@
+        </div>
+
+    }
+
+</div>
+

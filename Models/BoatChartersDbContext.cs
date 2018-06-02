@@ -52,7 +52,8 @@ namespace MyStore.Models
         public int ID { get; set; }
         public Cart Cart { get; set; }
         public Yacht Yacht { get; set; }
-        public DateTime Dates { get; set; }
+        public DateTime DatesFrom { get; set; }
+        public DateTime DatesTo { get; set; }
     }
     public class Order
     {
@@ -88,7 +89,8 @@ namespace MyStore.Models
         public int ID { get; set; }
         public Order Order { get; set; }
         public Yacht Yacht { get; set; }
-        public DateTime Dates { get; set; }
+        public DateTime DatesFrom { get; set; }
+        public DateTime DatesTo { get; set; }
 
     }
 }
