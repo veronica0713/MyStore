@@ -55,3 +55,27 @@
         display: none;
     }
 }
+
+
+.validation-summary-errors {
+    border: 2px solid red;
+    color: red;
+    font-weight: bold;
+    margin: 6px;
+    width: 30%;
+}
+
+.field-validation-error {
+    color: red;
+}
+
+.input-validation-error {
+    color: red;
+    font-weight: bold;
+    border: 1px solid red
+}
+
+
+.form-control {
+    color: #000
+}

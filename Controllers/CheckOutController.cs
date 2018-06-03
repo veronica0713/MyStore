@@ -39,8 +39,21 @@ namespace MyStore.Controllers
 
         public IActionResult Index()
         {
+            var checkoutViewModel = new CheckoutViewModel();
 
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = _oContext.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+
+                if (user != null)
+                {
+                    checkoutViewModel.FirstName = user.FirstName;
+                    checkoutViewModel.LastName = user.LastName;
+                    checkoutViewModel.Email = user.Email;
+                }
+            }
+
+            return View(checkoutViewModel);
         }
 
 

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 
 </head>
-<body >
+<body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">My Boat</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,26 +36,26 @@
                 <li class="nav-item mr-4">
                     <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
                 </li>
-              
+
                 @if (!User.Identity.IsAuthenticated)
-                 {
-                     <li class="nav-item mr-4">
-                         <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
-                     </li>
-            <li class="nav-item">
-                <a class="nav-link mr-4" asp-area="" asp-controller="Account" asp-action="LogIn">Sign in</a>
-            </li>
+                {
+                    <li class="nav-item mr-4">
+                        <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mr-4" asp-area="" asp-controller="Account" asp-action="LogIn">Sign in</a>
+                    </li>
 
-                 }
-              else
-              {
-            <li class="nav-item mr-4">
-                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="SignOut">Sign Out as @User.Identity.Name</a>
-            </li>
+                }
+                else
+                {
+                    <li class="nav-item mr-4">
+                        <a class="nav-link" asp-area="" asp-controller="Account" asp-action="SignOut">Sign Out as @User.Identity.Name</a>
+                    </li>
 
-              }
+                }
                 <li class="nav-item mr-4">
-                    <form class="form-inline" method="post" asp-controller="Home"asp-action="Search">
+                    <form class="form-inline" method="post" asp-controller="Home" asp-action="Search">
                         <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
                     </form>
@@ -74,12 +74,11 @@
     </div>
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/popper.js/dist/umd/popper.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-<script src="~/lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
-
-
-<script src="~/js/site.js" asp-append-version="true"></script>
-
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
     @RenderSection("Scripts", required: false)
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
 </body>
 </html>
