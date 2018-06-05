@@ -50,6 +50,7 @@ namespace MyStore.Controllers
                     checkoutViewModel.FirstName = user.FirstName;
                     checkoutViewModel.LastName = user.LastName;
                     checkoutViewModel.Email = user.Email;
+                    checkoutViewModel.PhoneNumber = user.PhoneNumber;
                 }
             }
 

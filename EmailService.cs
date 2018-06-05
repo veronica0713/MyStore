@@ -36,11 +36,11 @@ namespace MyStore
         public async Task<SendEmailResult> SendEmailAsync(string recipient, string subject, string htmlContent, string plainTextContent)
         {
 
-           var from = new SendGrid.Helpers.Mail.EmailAddress("admin@myboat.com", "My Boat");
+           var from = new SendGrid.Helpers.Mail.EmailAddress("bayarynava@gmail.com", "My Boat");
 
             var to = new SendGrid.Helpers.Mail.EmailAddress(recipient);
             var message = SendGrid.Helpers.Mail.MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            message.SetTemplateId("a58eb3b6-f8e3-403d-bdba-5796e2df4172");
+            //message.SetTemplateId("a58eb3b6-f8e3-403d-bdba-5796e2df4172");
             var mailResult = await _sendGridClient.SendEmailAsync(message);
 
             SendEmailResult result = new SendEmailResult();
